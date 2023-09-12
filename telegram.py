@@ -11,7 +11,8 @@ def start_message(message):
     item3 = types.KeyboardButton("Зупинити Контейнер")
     item4 = types.KeyboardButton("Запустити(після зупинки) Контейнер")
     item5 = types.KeyboardButton("Видалити Контейнер")
-    markup.add(item1, item2, item3,item4,item5)
+    item6 = types.KeyboardButton("Подивитись стан Контейнера")
+    markup.add(item1, item2, item3,item4,item5,item6)
     bot.send_message(
         message.chat.id, "Вибери операцію на AWS Instance:", reply_markup=markup
     )
@@ -47,7 +48,12 @@ def del_cont(message):
     kaka1 = subprocess.run(commands1, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     response_message = (f"Стан Контейнера:\nКоманда видала:\n + {kaka1.stdout} +\nПомилка:\n + {kaka1.stderr} +\nВихідний код:  + {str(kaka1.returncode)}")
     bot.send_message(message.chat.id,response_message)
-
+@bot.message_handler(func=lambda message: message.text == "Подивитись стан Контейнера")
+def check_cont(message):     
+    commands1 = "docker ps"
+    kaka1 = subprocess.run(commands1, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    response_message = (f"Стан Контейнера:\nКоманда видала:\n + {kaka1.stdout} +\nПомилка:\n + {kaka1.stderr} +\nВихідний код:  + {str(kaka1.returncode)}")
+    bot.send_message(message.chat.id,response_message)
 
 
 
