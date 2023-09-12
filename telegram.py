@@ -21,46 +21,31 @@ def create_cont(message):
     kaka = subprocess.run(commands, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     commands1 = "echo FROM httpd:latest >> Dockerfile && echo EXPOSE 80 >> Dockerfile && docker build -t telebot_python:v1 ."
     kaka1 = subprocess.run(commands1, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    response_message = ("Контейнер успішно створено!\n",
-    "Команда видала:\n" + kaka1.stdout +
-    "\nПомилка:\n" + kaka1.stderr +
-    "\nВихідний код: " + str(kaka1.returncode))
+    response_message = (f"Стан Контейнера:\nКоманда видала:\n + {kaka1.stdout} +\nПомилка:\n + {kaka1.stderr} +\nВихідний код:  + {str(kaka1.returncode)}")
     bot.send_message(message.chat.id,response_message)
 @bot.message_handler(func=lambda message: message.text == "Запустити Контейнер")
 def run_cont(message):
     commands1 = "docker run -d -p 80:80 --name my-apache telebot_python:v1"
     kaka1 = subprocess.run(commands1, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    response_message = ("Контейнер успішно запущено!\n",
-    "Команда видала:\n" + kaka1.stdout +
-    "\nПомилка:\n" + kaka1.stderr +
-    "\nВихідний код: " + str(kaka1.returncode))
+    response_message = (f"Стан Контейнера:\nКоманда видала:\n + {kaka1.stdout} +\nПомилка:\n + {kaka1.stderr} +\nВихідний код:  + {str(kaka1.returncode)}")
     bot.send_message(message.chat.id,response_message)
 @bot.message_handler(func=lambda message: message.text == "Зупинити Контейнер")
 def stop_cont(message):
     commands1 = "docker stop my-apache"
     kaka1 = subprocess.run(commands1, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    response_message = ("Контейнер успішно зупинено!\n",
-    "Команда видала:\n" + kaka1.stdout +
-    "\nПомилка:\n" + kaka1.stderr +
-    "\nВихідний код: " + str(kaka1.returncode))
+    response_message = (f"Стан Контейнера:\nКоманда видала:\n + {kaka1.stdout} +\nПомилка:\n + {kaka1.stderr} +\nВихідний код:  + {str(kaka1.returncode)}")
     bot.send_message(message.chat.id,response_message)
 @bot.message_handler(func=lambda message: message.text == "Запустити(після зупинки) Контейнер")
 def again_cont(message):
     commands1 = "docker start my-apache"
     kaka1 = subprocess.run(commands1, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    response_message = ("Контейнер успішно запущено знову!\n",
-    "Команда видала:\n" + kaka1.stdout +
-    "\nПомилка:\n" + kaka1.stderr +
-    "\nВихідний код: " + str(kaka1.returncode))
+    response_message = (f"Стан Контейнера:\nКоманда видала:\n + {kaka1.stdout} +\nПомилка:\n + {kaka1.stderr} +\nВихідний код:  + {str(kaka1.returncode)}")
     bot.send_message(message.chat.id,response_message)
 @bot.message_handler(func=lambda message: message.text == "Видалити Контейнер")
 def del_cont(message):
     commands1 = "docker rm -f my-apache"
     kaka1 = subprocess.run(commands1, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    response_message = ("Контейнер успішно видалено!\n",
-    "Команда видала:\n" + kaka1.stdout +
-    "\nПомилка:\n" + kaka1.stderr +
-    "\nВихідний код: " + str(kaka1.returncode))
+    response_message = (f"Стан Контейнера:\nКоманда видала:\n + {kaka1.stdout} +\nПомилка:\n + {kaka1.stderr} +\nВихідний код:  + {str(kaka1.returncode)}")
     bot.send_message(message.chat.id,response_message)
 
 
