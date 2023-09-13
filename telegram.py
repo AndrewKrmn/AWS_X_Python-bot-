@@ -18,9 +18,7 @@ def start_message(message):
     )
 @bot.message_handler(func=lambda message: message.text == "Створити Контейнер")
 def create_cont(message):
-    commands = "touch Dockerfile"
-    kaka = subprocess.run(commands, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    commands1 = "echo FROM httpd:latest >> Dockerfile && echo EXPOSE 80 >> Dockerfile && docker build -t telebot_python:v1 ."
+    commands1 = "touch Dockerfile && echo FROM httpd:latest >> Dockerfile && echo EXPOSE 80 >> Dockerfile && docker build -t telebot_python:v1 ."
     kaka1 = subprocess.run(commands1, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     response_message = (f"Стан Контейнера:\nКоманда видала:\n + {kaka1.stdout} +\nПомилка:\n + {kaka1.stderr} +\nВихідний код:  + {str(kaka1.returncode)}")
     bot.send_message(message.chat.id,response_message)
